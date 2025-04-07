@@ -15,6 +15,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {useSheetContext} from './GlobalSheetContext';
+import MenuLeft from './MenuLeft';
+import CartRight from './CartRight';
 
 const {width, height} = Dimensions.get('window');
 
@@ -149,7 +151,7 @@ const SheetComponent = ({id}) => {
                 backgroundColor: '#fff',
                 borderRadius: 12,
               }}>
-              {/* Your custom content here */}
+              {id === 'left-menu-sheet' ? <MenuLeft /> : <CartRight />}
             </View>
           </ScrollView>
         </Animated.View>

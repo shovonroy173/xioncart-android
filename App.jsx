@@ -3,7 +3,11 @@
 import React from 'react';
 import './global.css';
 import 'react-native-gesture-handler';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
 import Menu from './src/components/Menu';
 import BottomNavigator from './src/screens/BottomNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -13,14 +17,17 @@ import {SheetProvider} from './src/sheets/GlobalSheetContext';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import SheetComponent from './src/sheets/SheetComponent';
 import ModalComponent from './src/sheets/ModalComponent';
+import {useColorScheme} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
+  const theme = useColorScheme();
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <SheetProvider>
-        <NavigationContainer>
+        <NavigationContainer
+          theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
           <Menu />
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="BottomNavigator" component={BottomNavigator} />
@@ -28,9 +35,9 @@ function App() {
             <Stack.Screen name="Register" component={RegisterScreen} />
           </Stack.Navigator>
 
-          <SheetComponent id="sheet1" />
-          <SheetComponent id="sheet3" />
-          <SheetComponent id="sheet4" />
+          {/* <SheetComponent id="sheet1" /> */}
+          <SheetComponent id="left-menu-sheet" />
+          <SheetComponent id="right-cart-sheet" />
           <ModalComponent id="modal1" />
         </NavigationContainer>
       </SheetProvider>
