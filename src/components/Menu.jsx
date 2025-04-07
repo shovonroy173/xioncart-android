@@ -21,7 +21,7 @@ const Menu = () => {
         </Pressable>
 
         <Button title="Bottom" onPress={() => openSheet('sheet1', 'bottom')} />
-        <Button title="Top" onPress={() => openSheet('sheet2', 'top')} />
+        {/* <Button title="Top" onPress={() => openSheet('sheet2', 'top')} /> */}
         <Button title="Left" onPress={() => openSheet('sheet3', 'left')} />
         <Button title="Right" onPress={() => openSheet('sheet4', 'right')} />
         <Button title="Open Center Modal" onPress={() => openModal('modal1')} />

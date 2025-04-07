@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
 import {
   Dimensions,
@@ -10,10 +11,9 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  useAnimatedGestureHandler,
   runOnJS,
 } from 'react-native-reanimated';
-import {PanGestureHandler} from 'react-native-gesture-handler';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {useSheetContext} from './GlobalSheetContext';
 
 const {width, height} = Dimensions.get('window');
@@ -21,17 +21,31 @@ const {width, height} = Dimensions.get('window');
 const SheetComponent = ({id}) => {
   const {sheets, closeSheet} = useSheetContext();
   const sheet = sheets[id];
-
   const side = sheet?.side || 'bottom';
-  const translate = useSharedValue(0);
+
+  const translate = useSharedValue(getInitialTranslate(side));
   const opacity = useSharedValue(0);
+
+  useEffect(() => {
+    if (!sheet) {
+      return;
+    }
+
+    if (sheet.visible) {
+      translate.value = withTiming(0);
+      opacity.value = withTiming(0.4);
+    } else {
+      translate.value = withTiming(getInitialTranslate(side));
+      opacity.value = withTiming(0);
+    }
+  }, [translate, opacity, side, sheet]);
 
   function getInitialTranslate(sides) {
     switch (sides) {
       case 'bottom':
         return height;
-      case 'top':
-        return -height;
+      // case 'top':
+      //   return -height;
       case 'left':
         return -width * 0.8;
       case 'right':
@@ -41,73 +55,60 @@ const SheetComponent = ({id}) => {
     }
   }
 
-  useEffect(() => {
-    if (!sheet) return;
-
-    if (sheet.visible) {
-      // Animate in
-      translate.value = withTiming(0, {duration: 300});
-      opacity.value = withTiming(0.4, {duration: 300});
-    } else {
-      // Animate out
-      translate.value = withTiming(getInitialTranslate(side), {duration: 300});
-      opacity.value = withTiming(0, {duration: 300});
-    }
-  }, [translate, opacity, side, sheet]);
-
   const animatedStyle = useAnimatedStyle(() => {
-    const isVertical = side === 'top' || side === 'bottom';
-    const transform = isVertical
-      ? [{translateY: translate.value}]
-      : [{translateX: translate.value}];
+    let transformStyle;
 
-    const baseStyle = {
-      transform,
-      position: 'absolute',
-      backgroundColor: '#fff',
-      zIndex: 1000,
-    };
-
-    switch (side) {
-      case 'bottom':
-        return {
-          ...baseStyle,
-          left: 0,
-          right: 0,
-          height: height * 0.5,
-          bottom: 0,
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
-        };
-      case 'top':
-        return {
-          ...baseStyle,
-          left: 0,
-          right: 0,
-          height: height * 0.5,
-          top: 0,
-          borderBottomLeftRadius: 16,
-          borderBottomRightRadius: 16,
-        };
-      case 'left':
-        return {
-          ...baseStyle,
-          top: 0,
-          bottom: 0,
-          width: width * 0.8,
-          left: 0,
-        };
-      case 'right':
-        return {
-          ...baseStyle,
-          top: 0,
-          bottom: 0,
-          width: width * 0.8,
-          right: 0,
-        };
-      default:
-        return baseStyle;
+    if (side === 'bottom') {
+      transformStyle = [{translateY: translate.value}];
     }
+    // else if (side === 'top') {
+    //   transformStyle = [{ translateY: translate.value }];
+    // }
+    else {
+      transformStyle = [{translateX: translate.value}];
+    }
+
+    if (side === 'bottom') {
+      return {
+        transform: transformStyle,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        height: height * 0.5,
+        bottom: 0,
+      };
+    }
+    // else if (side === 'top') {
+    //   return {
+    //     transform: transformStyle,
+    //     position: 'absolute',
+    //     left: 0,
+    //     right: 0,
+    //     height: height * 0.5,
+    //     top: 0,
+    //   };
+    // }
+    else if (side === 'left') {
+      return {
+        transform: transformStyle,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        width: width * 0.8,
+        left: 0,
+      };
+    } else if (side === 'right') {
+      return {
+        transform: transformStyle,
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        width: width * 0.8,
+        right: 0,
+      };
+    }
+
+    return {};
   });
 
   const backdropStyle = useAnimatedStyle(() => ({
@@ -116,19 +117,22 @@ const SheetComponent = ({id}) => {
     ...StyleSheet.absoluteFillObject,
   }));
 
-  const gestureHandler = useAnimatedGestureHandler({
-    onEnd: e => {
-      const threshold = 100;
-      if (
-        (side === 'bottom' && e.translationY > threshold) ||
-        (side === 'top' && e.translationY < -threshold)
-      ) {
-        runOnJS(closeSheet)(id);
-      }
-    },
+  // Define gestures for bottom (or top in future)
+  const panGesture = Gesture.Pan().onEnd(e => {
+    const threshold = 100;
+
+    if (
+      side === 'bottom' &&
+      e.translationY > threshold
+      // || side === 'top' && e.translationY < -threshold
+    ) {
+      runOnJS(closeSheet)(id);
+    }
   });
 
-  if (!sheet?.visible) return null;
+  if (!sheet?.visible) {
+    return null;
+  }
 
   return (
     <>
@@ -136,18 +140,20 @@ const SheetComponent = ({id}) => {
         <Pressable style={{flex: 1}} onPress={() => closeSheet(id)} />
       </Animated.View>
 
-      <PanGestureHandler
-        enabled={side === 'top' || side === 'bottom'}
-        onGestureEvent={gestureHandler}>
+      <GestureDetector gesture={side === 'bottom' ? panGesture : Gesture.Tap()}>
         <Animated.View style={[styles.sheet, animatedStyle]}>
           <ScrollView contentContainerStyle={{padding: 20}}>
             <View
-              style={{height: 400, backgroundColor: '#fff', borderRadius: 12}}>
-              {/* Your custom content */}
+              style={{
+                height: 400,
+                backgroundColor: '#fff',
+                borderRadius: 12,
+              }}>
+              {/* Your custom content here */}
             </View>
           </ScrollView>
         </Animated.View>
-      </PanGestureHandler>
+      </GestureDetector>
     </>
   );
 };
@@ -155,6 +161,7 @@ const SheetComponent = ({id}) => {
 const styles = StyleSheet.create({
   sheet: {
     backgroundColor: '#fff',
+    zIndex: 1000,
     elevation: 10,
     shadowColor: '#000',
     shadowOpacity: 0.3,

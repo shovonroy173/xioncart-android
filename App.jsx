@@ -13,7 +13,6 @@ import {SheetProvider} from './src/sheets/GlobalSheetContext';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import SheetComponent from './src/sheets/SheetComponent';
 import ModalComponent from './src/sheets/ModalComponent';
-import MenuLeftSheet from './src/sheets/MenuLeftSheet';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,8 +29,6 @@ function App() {
           </Stack.Navigator>
 
           <SheetComponent id="sheet1" />
-          {/* <MenuLeftSheet id="sheet1" /> */}
-          <SheetComponent id="sheet2" />
           <SheetComponent id="sheet3" />
           <SheetComponent id="sheet4" />
           <ModalComponent id="modal1" />
