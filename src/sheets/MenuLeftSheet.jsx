@@ -18,13 +18,35 @@ import {useSheetContext} from './GlobalSheetContext';
 
 const {width, height} = Dimensions.get('window');
 
-const SheetComponent = ({id}) => {
+const MenuLeftSheet = ({id}) => {
   const {sheets, closeSheet} = useSheetContext();
   const sheet = sheets[id];
+  const side = sheet?.side;
 
-  const side = sheet?.side || 'bottom';
-  const translate = useSharedValue(0);
+  const translate = useSharedValue(getInitialTranslate(side));
   const opacity = useSharedValue(0);
+
+  useEffect(() => {
+    if (!sheet) return;
+    if (sheet.visible) {
+      translate.value = withTiming(0);
+      opacity.value = withTiming(0.4);
+    } else {
+      translate.value = withTiming(getInitialTranslate(side));
+      opacity.value = withTiming(0);
+    }
+  }, [opacity, side, translate, sheet]);
+
+  const getTransform = () => {
+    switch (side) {
+      case 'bottom':
+      case 'top':
+        return [{translateY: translate.value}];
+      case 'left':
+      case 'right':
+        return [{translateX: translate.value}];
+    }
+  };
 
   function getInitialTranslate(sides) {
     switch (sides) {
@@ -33,81 +55,25 @@ const SheetComponent = ({id}) => {
       case 'top':
         return -height;
       case 'left':
-        return -width * 0.8;
+        return -width * 0.8; // move left sheet off screen to the left
       case 'right':
-        return width * 0.8;
+        return width * 0.8; // move right sheet off screen to the right
       default:
         return height;
     }
   }
 
-  useEffect(() => {
-    if (!sheet) return;
-
-    if (sheet.visible) {
-      // Animate in
-      translate.value = withTiming(0, {duration: 300});
-      opacity.value = withTiming(0.4, {duration: 300});
-    } else {
-      // Animate out
-      translate.value = withTiming(getInitialTranslate(side), {duration: 300});
-      opacity.value = withTiming(0, {duration: 300});
-    }
-  }, [translate, opacity, side, sheet]);
-
   const animatedStyle = useAnimatedStyle(() => {
-    const isVertical = side === 'top' || side === 'bottom';
-    const transform = isVertical
-      ? [{translateY: translate.value}]
-      : [{translateX: translate.value}];
+    let transformStyle;
 
-    const baseStyle = {
-      transform,
+    return {
+      transform: transformStyle,
       position: 'absolute',
-      backgroundColor: '#fff',
-      zIndex: 1000,
+      top: 0,
+      bottom: 0,
+      width: width * 0.8,
+      left: 0,
     };
-
-    switch (side) {
-      case 'bottom':
-        return {
-          ...baseStyle,
-          left: 0,
-          right: 0,
-          height: height * 0.5,
-          bottom: 0,
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
-        };
-      case 'top':
-        return {
-          ...baseStyle,
-          left: 0,
-          right: 0,
-          height: height * 0.5,
-          top: 0,
-          borderBottomLeftRadius: 16,
-          borderBottomRightRadius: 16,
-        };
-      case 'left':
-        return {
-          ...baseStyle,
-          top: 0,
-          bottom: 0,
-          width: width * 0.8,
-          left: 0,
-        };
-      case 'right':
-        return {
-          ...baseStyle,
-          top: 0,
-          bottom: 0,
-          width: width * 0.8,
-          right: 0,
-        };
-      default:
-        return baseStyle;
-    }
   });
 
   const backdropStyle = useAnimatedStyle(() => ({
@@ -119,12 +85,13 @@ const SheetComponent = ({id}) => {
   const gestureHandler = useAnimatedGestureHandler({
     onEnd: e => {
       const threshold = 100;
-      if (
-        (side === 'bottom' && e.translationY > threshold) ||
-        (side === 'top' && e.translationY < -threshold)
-      ) {
-        runOnJS(closeSheet)(id);
-      }
+      //   if (
+      //     (side === 'bottom' && e.translationY > threshold) ||
+      //     (side === 'top' && e.translationY < -threshold)
+      //   ) {
+      //     runOnJS(closeSheet)(id);
+      //   }
+      runOnJS(closeSheet)(id);
     },
   });
 
@@ -155,6 +122,7 @@ const SheetComponent = ({id}) => {
 const styles = StyleSheet.create({
   sheet: {
     backgroundColor: '#fff',
+    zIndex: 1000,
     elevation: 10,
     shadowColor: '#000',
     shadowOpacity: 0.3,
@@ -162,4 +130,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SheetComponent;
+export default MenuLeftSheet;
