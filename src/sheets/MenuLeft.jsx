@@ -1,16 +1,21 @@
-import {View, Text, Pressable} from 'react-native';
+import {View, Text, Pressable, Dimensions} from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useSheetContext} from './GlobalSheetContext';
-// const {width, height} = Dimensions.get('window');
-
+import {useNavigation} from '@react-navigation/native';
+const {height} = Dimensions.get('window');
 const MenuLeft = () => {
   const {closeSheet} = useSheetContext();
+  const navigation = useNavigation();
+  const handleHomeRoute = () => {
+    navigation.navigate('BottomNavigator', {screen: 'Home'});
+    closeSheet('left-menu-sheet');
+  };
+
   return (
-    <View
-      className="flex-1 justify-between">
+    <View style={{height: height}} className="flex-1 justify-between ">
       <View className="gap-5">
         <Pressable onPress={() => closeSheet('left-menu-sheet')}>
           <MaterialCommunityIcons name="close" size={24} color="black" />
@@ -18,7 +23,7 @@ const MenuLeft = () => {
 
         <View>
           <View className="gap-4">
-            <Pressable className="gap-2">
+            <Pressable className="gap-2" onPress={() => handleHomeRoute()}>
               <Text>Home</Text>
               <View className="h-[1px] bg-gray-600" />
             </Pressable>
