@@ -29,6 +29,10 @@ const BottomNavigator = () => {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          height: 70,
+          paddingTop: 10,
+        },
       }}>
       <Tab.Screen
         name="Home"
@@ -51,6 +55,9 @@ const BottomNavigator = () => {
           ),
           tabBarActiveTintColor: '#dc2626',
           tabBarInactiveTintColor: '#000',
+          tabBarLabelStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
         }}
       />
       <Tab.Screen
@@ -72,6 +79,9 @@ const BottomNavigator = () => {
           ),
           tabBarActiveTintColor: '#dc2626',
           tabBarInactiveTintColor: '#000',
+          tabBarLabelStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
         }}
       />
       <Tab.Screen
@@ -87,6 +97,9 @@ const BottomNavigator = () => {
           ),
           tabBarActiveTintColor: '#dc2626',
           tabBarInactiveTintColor: '#000',
+          tabBarLabelStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
         }}
       />
       <Tab.Screen
@@ -103,6 +116,9 @@ const BottomNavigator = () => {
           tabBarActiveTintColor: '#dc2626',
           tabBarInactiveTintColor: '#000',
           tabBarBadge: 0,
+          tabBarLabelStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
         }}
       />
       <Tab.Screen
@@ -122,6 +138,9 @@ const BottomNavigator = () => {
           tabBarActiveTintColor: '#dc2626',
           tabBarInactiveTintColor: '#000',
           tabBarBadge: 0,
+          tabBarLabelStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
         }}
       />
     </Tab.Navigator>

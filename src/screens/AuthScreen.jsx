@@ -5,7 +5,9 @@ import AccountScreen from './AccountScreen';
 
 const AuthScreen = () => {
   const auth = false;
-  return <View>{auth ? <AccountScreen /> : <LoginScreen />}</View>;
+  return (
+    <View className="flex-1">{auth ? <AccountScreen /> : <LoginScreen />}</View>
+  );
 };
 
 export default AuthScreen;
