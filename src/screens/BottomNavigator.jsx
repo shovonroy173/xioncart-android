@@ -32,6 +32,8 @@ const BottomNavigator = () => {
         tabBarStyle: {
           height: 70,
           paddingTop: 10,
+          // tabBarLabelPosition: 'below-icon',
+          // paddingHorizontal: 20,
         },
       }}>
       <Tab.Screen
@@ -58,6 +60,8 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarLabelPosition: 'below-icon',
+
         }}
       />
       <Tab.Screen
@@ -82,6 +86,8 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarLabelPosition: 'below-icon',
+
         }}
       />
       <Tab.Screen
@@ -100,6 +106,8 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarLabelPosition: 'below-icon',
+
         }}
       />
       <Tab.Screen
@@ -119,6 +127,8 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarLabelPosition: 'below-icon',
+
         }}
       />
       <Tab.Screen
@@ -141,6 +151,8 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarLabelPosition: 'below-icon',
+
         }}
       />
     </Tab.Navigator>

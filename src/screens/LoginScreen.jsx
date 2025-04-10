@@ -5,10 +5,7 @@ import {
   Pressable,
   ScrollView,
   Text,
-  TextInput,
-  TouchableOpacity,
   useColorScheme,
-  View,
 } from 'react-native';
 import React, {useState} from 'react';
 import ThemedText from '../utils/ThemedText';
@@ -21,11 +18,16 @@ import {useLoginMutation} from '../redux/slices/authSlice';
 import ThemedView from '../utils/ThemedView';
 import ThemedViewLightRed from '../utils/ThemedViewLightRed';
 import ThemedPressable from '../utils/ThemedPressable';
-
-import {Button} from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {useNavigation} from '@react-navigation/native';
+import Feather from 'react-native-vector-icons/Feather';
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
   const theme = useColorScheme();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [login] = useLoginMutation();
@@ -45,9 +47,13 @@ const LoginScreen = () => {
 
   const onSubmit = async data => {
     console.log('Form submitted:', data);
-    const res = await login(data).unwrap();
-    console.log('LINE AT 21', res);
-    reset();
+    try {
+      const res = await login(data).unwrap();
+      console.log('LINE AT 21', res);
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleForgetPassword = () => {
@@ -60,14 +66,23 @@ const LoginScreen = () => {
       className="flex-1">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} className="flex-1">
         <ThemedView styles="flex-1">
-          <ThemedViewLightRed styles="h-36  justify-center items-center">
+          <ThemedViewLightRed
+            styles="justify-center items-center"
+            style={{height: responsiveHeight(20)}}>
             <ThemedText styles="text-2xl font-Bold">Log in</ThemedText>
           </ThemedViewLightRed>
-          <ThemedView styles="px-5 pt-5 flex-1 gap-2">
-            <ThemedText styles="text-xl font-Medium">Log in</ThemedText>
+          <ThemedView
+            styles="flex-1"
+            style={{
+              paddingHorizontal: responsiveWidth(5),
+              paddingTop: responsiveHeight(2),
+              gap: responsiveHeight(2),
+            }}>
             <ScrollView
               className="flex-grow"
               showsVerticalScrollIndicator={false}>
+            <ThemedText styles="text-xl font-Medium pb-2">Log in</ThemedText>
+
               <ThemedTextInput
                 name="email"
                 control={control}
@@ -75,21 +90,7 @@ const LoginScreen = () => {
                 label="Email Address *"
                 placeholder="Enter your email"
                 type="email"
-              /> <ThemedTextInput
-              name="email"
-              control={control}
-              error={errors?.email?.message}
-              label="Email Address *"
-              placeholder="Enter your email"
-              type="email"
-            /> <ThemedTextInput
-            name="email"
-            control={control}
-            error={errors?.email?.message}
-            label="Email Address *"
-            placeholder="Enter your email"
-            type="email"
-          />
+              />{' '}
               <ThemedTextInput
                 name="password"
                 control={control}
@@ -102,89 +103,35 @@ const LoginScreen = () => {
                   <Ionicons
                     name={isPasswordVisible ? 'eye-off' : 'eye'}
                     size={24}
-                    color={theme === 'dark' ? 'white' : 'black'}
                   />
                 }
                 onPress={togglePasswordVisibility}
               />
-<ThemedTextInput
-                name="password"
-                control={control}
-                error={errors?.password?.message}
-                label="Password *"
-                placeholder="Enter your password"
-                type="password"
-                secureTextEntry={!isPasswordVisible}
-                rightIcon={
-                  <Ionicons
-                    name={isPasswordVisible ? 'eye-off' : 'eye'}
-                    size={24}
-                    color={theme === 'dark' ? 'white' : 'black'}
-                  />
-                }
-                onPress={togglePasswordVisibility}
-              />
-<ThemedTextInput
-                name="password"
-                control={control}
-                error={errors?.password?.message}
-                label="Password *"
-                placeholder="Enter your password"
-                type="password"
-                secureTextEntry={!isPasswordVisible}
-                rightIcon={
-                  <Ionicons
-                    name={isPasswordVisible ? 'eye-off' : 'eye'}
-                    size={24}
-                    color={theme === 'dark' ? 'white' : 'black'}
-                  />
-                }
-                onPress={togglePasswordVisibility}
-              />
-<ThemedTextInput
-                name="password"
-                control={control}
-                error={errors?.password?.message}
-                label="Password *"
-                placeholder="Enter your password"
-                type="password"
-                secureTextEntry={!isPasswordVisible}
-                rightIcon={
-                  <Ionicons
-                    name={isPasswordVisible ? 'eye-off' : 'eye'}
-                    size={24}
-                    color={theme === 'dark' ? 'white' : 'black'}
-                  />
-                }
-                onPress={togglePasswordVisibility}
-              />
-<ThemedTextInput
-                name="password"
-                control={control}
-                error={errors?.password?.message}
-                label="Password *"
-                placeholder="Enter your password"
-                type="password"
-                secureTextEntry={!isPasswordVisible}
-                rightIcon={
-                  <Ionicons
-                    name={isPasswordVisible ? 'eye-off' : 'eye'}
-                    size={24}
-                    color={theme === 'dark' ? 'white' : 'black'}
-                  />
-                }
-                onPress={togglePasswordVisibility}
-              />
-
               <Pressable onPress={handleForgetPassword}>
                 <ThemedText styles="font-Medium underline">
                   Forgot Password?
                 </ThemedText>
               </Pressable>
+              <ThemedView styles="flex-row items-center gap-2 mt-5">
+                <ThemedText styles="font-Medium">Are new here?</ThemedText>
+                <Pressable
+                  onPress={() => navigation.navigate('Register')}
+                  className="flex-row gap-1">
+                  <ThemedText styles="font-Medium underline">
+                    Register
+                  </ThemedText>
+                  <ThemedText>
+                    <Feather name="arrow-up-right" size={20} />
+                  </ThemedText>
+                </Pressable>
+              </ThemedView>
             </ScrollView>
-            <ThemedView styles="py-2">
+            <ThemedView styles="pb-2">
               <ThemedPressable
-                styles="py-3 rounded-lg"
+                styles=" rounded-lg"
+                style={{
+                  paddingVertical: responsiveHeight(2),
+                }}
                 onPress={handleSubmit(onSubmit)}>
                 <Text
                   className={`text-center text-lg font-SemiBold ${

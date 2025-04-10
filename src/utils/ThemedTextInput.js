@@ -1,6 +1,10 @@
 import {Controller} from 'react-hook-form';
 import {TextInput, View, Text, Pressable} from 'react-native';
 import {useColorScheme} from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const ThemedTextInput = ({
   label,
@@ -39,20 +43,33 @@ const ThemedTextInput = ({
             placeholder={placeholder}
             placeholderTextColor={theme === 'dark' ? '#ccc' : '#888'}
             secureTextEntry={secureTextEntry}
-            className={`${themedInputClasses} px-3 pb-2 pt-9  border rounded-md font-Regular ${
+            style={{
+              paddingHorizontal: responsiveWidth(3),
+              paddingBottom: responsiveHeight(1),
+              paddingTop: responsiveHeight(5),
+            }}
+            className={`${themedInputClasses}  border rounded-md font-Regular ${
               error && 'border-red-500'
             }`}
           />
           {label && (
             <Text
-              className={`${themedLabelClasses} absolute left-2 top-3 px-1 font-Regular`}>
+              className={`${themedLabelClasses} absolute font-Regular`}
+              style={{
+                left: responsiveWidth(2),
+                top: responsiveHeight(1),
+                paddingHorizontal: responsiveWidth(1),
+              }}>
               {label}
             </Text>
           )}
           {rightIcon && (
             <Pressable
               onPress={props.onPress}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10"
+              className="absolute top-1/2 -translate-y-1/2 z-10"
+              style={{
+                right: responsiveWidth(3),
+              }}
               hitSlop={10}>
               {rightIcon}
             </Pressable>

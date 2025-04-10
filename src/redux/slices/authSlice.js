@@ -11,7 +11,14 @@ export const authSlice = createApi({
         body: credentials,
       }),
     }),
+    register: builder.mutation({
+      query: credentials => ({
+        url: '/auth/register',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
   }),
 });
 
-export const {useLoginMutation} = authSlice;
+export const {useLoginMutation, useRegisterMutation} = authSlice;

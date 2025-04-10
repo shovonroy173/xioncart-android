@@ -6,14 +6,23 @@ import Feather from 'react-native-vector-icons/Feather';
 import ThemedView from '../utils/ThemedView.js';
 import ThemedViewLightGray from '../utils/ThemedViewLightGray.js';
 import ThemedText from '../utils/ThemedText.js';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 
 const Menu = () => {
   const navigation = useNavigation();
   const {openSheet} = useSheetContext();
 
   return (
-    <ThemedView styles="gap-2">
-      <ThemedViewLightGray styles="flex-row justify-center items-center py-2 bg-zinc-200">
+    <ThemedView
+      style={{
+        gap: responsiveHeight(2),
+      }}>
+      <ThemedViewLightGray
+        styles="flex-row justify-center items-center py-2 bg-zinc-200"
+        style={{paddingVertical: responsiveHeight(2)}}>
         <ThemedText styles="font-Regular">
           Spring Sale: Sweet Crunchy Salad.{' '}
         </ThemedText>
@@ -22,7 +31,12 @@ const Menu = () => {
           <Feather name="arrow-up-right" size={20} color="#dc2626" />
         </Pressable>
       </ThemedViewLightGray>
-      <ThemedView styles="flex flex-row justify-between items-center px-3 py-2">
+      <ThemedView
+        styles="flex flex-row justify-between items-center"
+        style={{
+          paddingVertical: responsiveHeight(1),
+          paddingHorizontal: responsiveWidth(3),
+        }}>
         <Pressable onPress={() => openSheet('left-menu-sheet', 'left')}>
           <Feather
             name="bar-chart-2"
@@ -43,7 +57,12 @@ const Menu = () => {
           />
         </Pressable>
 
-        <View className="flex-row gap-3 pr-4">
+        <View
+          className="flex-row"
+          style={{
+            gap: responsiveHeight(3),
+            paddingRight: responsiveWidth(4),
+          }}>
           <Pressable onPress={() => openSheet('right-search-sheet', 'right')}>
             <Feather
               name="search"

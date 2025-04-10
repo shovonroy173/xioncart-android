@@ -14,6 +14,7 @@ import {
 } from 'redux-persist';
 import {setupListeners} from '@reduxjs/toolkit/query';
 import {authSlice} from './slices/authSlice';
+// import {categorySlice} from './slices/categorySlice';
 const persistedConfig = {
   key: 'root',
   version: 1,
@@ -24,6 +25,7 @@ const persistedConfig = {
 const combinedReducer = combineReducers({
   auth: authReducer,
   authApi: authSlice.reducer,
+  // categoryApi: categorySlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistedConfig, combinedReducer);
