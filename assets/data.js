@@ -47,9 +47,63 @@ export const categories = [
 ];
 
 export const sortOptions = [
-  { label: 'Default', value: 'default' },
-  { label: 'Alphabetically (A to Z)', value: 'name-asc' },
-  { label: 'Alphabetically (Z to A)', value: 'name-desc' },
-  { label: 'Price (Low to High)', value: 'price-asc' },
-  { label: 'Price (High to Low)', value: 'price-desc' },
+  {label: 'Default', value: 'default'},
+  {label: 'Alphabetically (A to Z)', value: 'name-asc'},
+  {label: 'Alphabetically (Z to A)', value: 'name-desc'},
+  {label: 'Price (Low to High)', value: 'price-asc'},
+  {label: 'Price (High to Low)', value: 'price-desc'},
+];
+
+export const currencyOptions = [
+  {label: '🇧🇩 BDT', value: 'BDT'},
+  // {label: '🇺🇸 USD', value: 'USD'},
+  // {label: '🇪🇺 EUR', value: 'EUR'},
+  // {label: '🇬🇧 GBP', value: 'GBP'},
+  // {label: '🇯🇵 JPY', value: 'JPY'},
+  // {label: '🇨🇦 CAD', value: 'CAD'},
+  // {label: '🇦🇺 AUD', value: 'AUD'},
+  // {label: '🇨🇭 CHF', value: 'CHF'},
+  // {label: '🇸🇬 SGD', value: 'SGD'},
+  // {label: '🇮🇳 INR', value: 'INR'},
+  // {label: '🇨🇳 CNY', value: 'CNY'},
+  // {label: '🇧🇷 BRL', value: 'BRL'},
+  // {label: '🇿🇦 ZAR', value: 'ZAR'},
+  // {label: '🇷🇺 RUB', value: 'RUB'},
+  // {label: '🇲🇽 MXN', value: 'MXN'},
+  // {label: '🇰🇷 KRW', value: 'KRW'},
+  // {label: '🇸🇦 SAR', value: 'SAR'},
+  // {label: '🇹🇷 TRY', value: 'TRY'},
+  // {label: '🇳🇬 NGN', value: 'NGN'},
+  // {label: '🇦🇪 AED', value: 'AED'},
+];
+
+export const languageOptions = [
+  {label: 'English', value: 'english'},
+  // {label: 'Bengali', value: 'bengali'},
+  // {label: 'French', value: 'french'},
+  // {label: 'Spanish', value: 'spanish'},
+  // {label: 'Hindi', value: 'hindi'},
+  // {label: 'Mandarin Chinese', value: 'mandarin'},
+  // {label: 'Arabic', value: 'arabic'},
+  // {label: 'Portuguese', value: 'portuguese'},
+  // {label: 'Russian', value: 'russian'},
+  // {label: 'Urdu', value: 'urdu'},
+  // {label: 'Japanese', value: 'japanese'},
+  // {label: 'German', value: 'german'},
+  // {label: 'Italian', value: 'italian'},
+  // {label: 'Korean', value: 'korean'},
+  // {label: 'Turkish', value: 'turkish'},
+  // {label: 'Vietnamese', value: 'vietnamese'},
+  // {label: 'Persian (Farsi)', value: 'farsi'},
+  // {label: 'Malay/Indonesian', value: 'malay'},
+  // {label: 'Thai', value: 'thai'},
+  // {label: 'Swahili', value: 'swahili'},
+];
+
+export const payment = [
+  {id: 1, url: 'https://xioncart.com/images/payments/visa.png'},
+  {id: 2, url: 'https://xioncart.com/images/payments/img-1.png'},
+  {id: 3, url: 'https://xioncart.com/images/payments/img-2.png'},
+  {id: 4, url: 'https://xioncart.com/images/payments/img-3.png'},
+  {id: 5, url: 'https://xioncart.com/images/payments/img-4.png'},
 ];

@@ -37,6 +37,7 @@ const BottomNavigator = () => {
           // tabBarLabelPosition: 'below-icon',
           // paddingHorizontal: 20,
         },
+        animation: 'shift',
       }}>
       <Tab.Screen
         name="Home"

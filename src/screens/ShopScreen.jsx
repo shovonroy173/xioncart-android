@@ -6,12 +6,14 @@ import {responsiveHeight} from 'react-native-responsive-dimensions';
 import ThemedText from '../utils/ThemedText';
 import Feather from 'react-native-vector-icons/Feather';
 import {useSheetContext} from '../sheets/GlobalSheetContext';
-
-import DropdownBox from '../components/DropdownBox';
 import {sortOptions} from '../../assets/data';
+import Footer from '../components/Footer';
+import {useThemeColor} from '../utils/useThemeColor';
+import CustomDropdown from '../components/CustomDropdown';
 const ShopScreen = ({route, params}) => {
   console.log(route, params);
   const {openSheet} = useSheetContext();
+  const {icon} = useThemeColor();
   return (
     <ThemedView styles="flex-1">
       <ScrollView vertical showsVerticalScrollIndicator={false}>
@@ -34,11 +36,16 @@ const ShopScreen = ({route, params}) => {
             }}>
             <ThemedView styles="items-end">
               <ThemedView styles="w-52">
-                <DropdownBox sortOptions={sortOptions} />
+                <CustomDropdown
+                  data={sortOptions}
+                  placeholder={sortOptions[0]?.label}
+                />
               </ThemedView>
             </ThemedView>
 
             {/* products */}
+
+            <Footer />
           </ThemedView>
         </ThemedView>
       </ScrollView>
@@ -46,7 +53,7 @@ const ShopScreen = ({route, params}) => {
         onPress={() => openSheet('right-categories-sheet', 'right')}
         className="absolute top-40 left-0">
         <ThemedView styles=" p-2 border border-zinc-200 rounded-md">
-          <Feather name="sidebar" size={20} />
+          <Feather name="sidebar" size={20} color={icon} />
         </ThemedView>
       </Pressable>
     </ThemedView>

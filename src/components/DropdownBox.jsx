@@ -2,22 +2,23 @@
 import {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const DropdownBox = ({sortOptions}) => {
+const DropdownBox = ({options}) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('default');
-
+  const [value, setValue] = useState(options[0]?.value);
 
   return (
     <DropDownPicker
       open={open}
       value={value}
-      items={sortOptions}
+      items={options}
       setOpen={setOpen}
       setValue={setValue}
       showTickIcon={false}
+      // theme="LIGHT"
       style={{
         borderWidth: 1,
         borderColor: '#e4e4e7',
+        zIndex: 100,
       }}
       dropDownContainerStyle={{
         marginTop: 10,
@@ -37,10 +38,8 @@ const DropdownBox = ({sortOptions}) => {
       }}
       listItemLabelStyle={{
         fontFamily: 'AlbertSans-Regular',
-        color: '#333',
       }}
       selectedItemLabelStyle={{
-        color: '#000',
         fontFamily: 'AlbertSans-SemiBold',
       }}
       selectedItemContainerStyle={{

@@ -1,33 +1,20 @@
-import {StyleSheet, Text, useColorScheme} from 'react-native';
+import React from 'react';
+import {Text} from 'react-native';
+import {useColorScheme} from 'react-native';
 
-export const ThemedText2 = ({children, style, ...props}) => {
+const ThemedText2 = ({children, styles, ...props}) => {
   const theme = useColorScheme();
 
   // Apply theme-based text colors and other styles
-  const themedStyles = [
-    theme === 'dark' ? styles.darkText : styles.lightText,
-    style, // merge with custom styles
-  ];
+  const themedStyles = `${
+    theme === 'dark' ? 'text-zinc-200' : 'text-zinc-500'
+  } ${styles}`;
 
   return (
-    <Text
-    //  {...props}
-    
-    style={themedStyles}>
+    <Text {...props} className={themedStyles}>
       {children}
     </Text>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollViewContainer: {
-    flexGrow: 1,
-    gap: 5,
-  },
-  darkText: {
-    color: 'white',
-  },
-  lightText: {
-    color: 'black',
-  },
-});
+export default ThemedText2;

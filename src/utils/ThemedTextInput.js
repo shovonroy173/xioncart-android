@@ -21,12 +21,12 @@ const ThemedTextInput = ({
   // Apply theme-based classes for the TextInput and label
   const themedInputClasses = `${
     theme === 'dark'
-      ? 'bg-black text-white border-gray-600'
+      ? 'bg-black text-zinc-200 border-gray-600'
       : 'bg-white text-black border-gray-300'
   }`;
 
   const themedLabelClasses = `${
-    theme === 'dark' ? 'text-white' : 'text-black'
+    theme === 'dark' ? 'text-zinc-200' : 'text-black'
   } text-md`;
 
   return (

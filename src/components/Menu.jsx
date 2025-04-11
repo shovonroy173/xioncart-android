@@ -10,11 +10,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useThemeColor } from '../utils/useThemeColor.js';
 
 const Menu = () => {
   const navigation = useNavigation();
   const {openSheet} = useSheetContext();
-
+  const {icon, text} = useThemeColor();
   return (
     <ThemedView
       style={{
@@ -41,7 +42,7 @@ const Menu = () => {
           <Feather
             name="bar-chart-2"
             size={28}
-            // color="black"
+            color={icon}
             style={{
               transform: [{rotate: '270deg'}, {rotateX: '180deg'}],
             }}
@@ -67,6 +68,7 @@ const Menu = () => {
             <Feather
               name="search"
               size={24}
+              color={icon}
             />
           </Pressable>
 
@@ -75,10 +77,9 @@ const Menu = () => {
               <Feather
                 name="shopping-bag"
                 size={24}
-
-                // color="black"
+                color={icon}
               />
-              <Text className="rounded-full bg-red-500 text-white absolute -right-3 -top-3 px-2 py-0.5 font-Regular">
+              <Text className={`rounded-full bg-red-500 text-${text} absolute -right-3 -top-3 px-2 py-0.5 font-Regular`}>
                 0
               </Text>
             </View>

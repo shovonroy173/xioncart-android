@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
-import {Dimensions, Pressable, StyleSheet, View} from 'react-native';
+import {Dimensions, Pressable, StyleSheet} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,6 +11,8 @@ import Animated, {
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {useSheetContext} from './GlobalSheetContext';
 import CartRight from './CartRight';
+import ThemedView from '../utils/ThemedView';
+import {responsiveHeight} from 'react-native-responsive-dimensions';
 
 const {width, height} = Dimensions.get('window');
 const SHEET_ANIMATION_DURATION = 300;
@@ -81,9 +83,13 @@ const RightCartSheet = ({id}) => {
 
       <GestureDetector gesture={side === 'right' ? panGesture : Gesture.Tap()}>
         <Animated.View style={[styles.sheet, animatedStyle]}>
-          <View style={styles.content}>
+          <ThemedView
+            style={{
+              padding: responsiveHeight(2),
+              flex: 1,
+            }}>
             <CartRight />
-          </View>
+          </ThemedView>
         </Animated.View>
       </GestureDetector>
     </>
@@ -99,12 +105,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 10,
   },
-  content: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 20,
-  },
+  // content: {
+  //   flex: 1,
+  //   backgroundColor: '#fff',
+  //   borderRadius: 12,
+  //   padding: 20,
+  // },
 });
 
 export default RightCartSheet;

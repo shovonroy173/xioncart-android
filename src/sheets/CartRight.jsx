@@ -1,40 +1,58 @@
-import {View, Text, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useSheetContext} from './GlobalSheetContext';
+import ThemedView from '../utils/ThemedView';
+import ThemedText from '../utils/ThemedText';
+import ThemedPressable from '../utils/ThemedPressable';
+import ThemedText2 from '../utils/ThemeText2';
+import ThemedViewBorder from '../utils/ThemedViewBorder';
+import {useThemeColor} from '../utils/useThemeColor';
 
 const CartRight = () => {
   const {closeSheet} = useSheetContext();
-
+  const {icon} = useThemeColor();
   return (
-    <View className="flex-1 justify-between">
-      <View className="gap-5">
-        <View className="flex-row justify-between items-center">
-          <Text>Shopping cart</Text>
+    <ThemedView styles="flex-1 justify-between">
+      <ThemedView styles="gap-5">
+        <ThemedView styles="flex-row justify-between items-center">
+          <ThemedText styles="font-SemiBold font-[14px]">
+            Shopping cart
+          </ThemedText>
           <Pressable onPress={() => closeSheet('right-cart-sheet')}>
-            <MaterialCommunityIcons name="close" size={24} color="black" />
+            <MaterialCommunityIcons name="close" size={24} color={icon} />
           </Pressable>
-        </View>
-        <View className="gap-2">
-          <Text>Your shop cart is empty:</Text>
-          <Pressable className="bg-black rounded-sm p-2">
-            <Text className="text-white text-center">Explore Products</Text>
-          </Pressable>
-        </View>
-      </View>
-      <View className="gap-5">
-        <View className="flex-row justify-between">
-          <Text>Subtotal</Text>
-          <Text>৳ 0.00</Text>
-        </View>
-        <Pressable className="border-2  rounded-sm p-2">
-          <Text className="text-black text-center">View Cart</Text>
+        </ThemedView>
+        <ThemedView styles="gap-2">
+          <ThemedText styles="font-SemiBold font-[14px]">
+            Your shop cart is empty:
+          </ThemedText>
+          <ThemedPressable styles="rounded-sm p-2">
+            <ThemedText2 styles="text-center font-SemiBold">
+              Explore Products
+            </ThemedText2>
+          </ThemedPressable>
+        </ThemedView>
+      </ThemedView>
+      <ThemedView styles="gap-5">
+        <ThemedView styles="flex-row justify-between">
+          <ThemedText styles="font-SemiBold font-[14px]">Subtotal</ThemedText>
+          <ThemedText styles="font-SemiBold font-[14px]">৳ 0.00</ThemedText>
+        </ThemedView>
+        <Pressable>
+          <ThemedViewBorder styles="border-2  rounded-sm p-2">
+            <ThemedText styles="font-SemiBold text-center">
+              ThemedView Cart
+            </ThemedText>
+          </ThemedViewBorder>
         </Pressable>
-        <Pressable className="bg-black rounded-sm p-2">
-          <Text className="text-white text-center">Check out</Text>
-        </Pressable>
-      </View>
-    </View>
+        <ThemedPressable styles=" rounded-sm p-2">
+          <ThemedText2 styles="text-center font-SemiBold">
+            Check out
+          </ThemedText2>
+        </ThemedPressable>
+      </ThemedView>
+    </ThemedView>
   );
 };
 

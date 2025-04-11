@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect} from 'react';
-import {Dimensions, Pressable, StyleSheet, View} from 'react-native';
+import {Dimensions, Pressable, StyleSheet} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -10,7 +10,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import {useSheetContext} from './GlobalSheetContext';
-import SearchRight from './SearchRight';
+import ThemedView from '../utils/ThemedView';
+import RightCategories from './RightCategories';
+import {responsiveHeight} from 'react-native-responsive-dimensions';
 
 const {width, height} = Dimensions.get('window');
 const SHEET_ANIMATION_DURATION = 300;
@@ -81,9 +83,13 @@ const RightCategoriesSheet = ({id}) => {
 
       <GestureDetector gesture={side === 'right' ? panGesture : Gesture.Tap()}>
         <Animated.View style={[styles.sheet, animatedStyle]}>
-          <View style={styles.content}>
-            <SearchRight />
-          </View>
+          <ThemedView
+            styles={{
+              flex: 1,
+              padding: responsiveHeight(2),
+            }}>
+            <RightCategories />
+          </ThemedView>
         </Animated.View>
       </GestureDetector>
     </>

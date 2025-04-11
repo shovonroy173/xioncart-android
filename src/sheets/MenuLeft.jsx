@@ -1,10 +1,18 @@
-import {View, Text, Pressable, Dimensions} from 'react-native';
+import {Pressable, Dimensions, View} from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {useSheetContext} from './GlobalSheetContext';
 import {useNavigation} from '@react-navigation/native';
+import ThemedView from '../utils/ThemedView';
+import ThemedText from '../utils/ThemedText';
+import {responsiveScreenHeight} from 'react-native-responsive-dimensions';
+import {currencyOptions, languageOptions} from '../../assets/data';
+import {useThemeColor} from '../utils/useThemeColor';
+import ThemedText2 from '../utils/ThemeText2';
+import ThemedViewLightGray from '../utils/ThemedViewLightGray';
+import CustomDropdown from '../components/CustomDropdown';
 const {height} = Dimensions.get('window');
 const MenuLeft = () => {
   const {closeSheet} = useSheetContext();
@@ -13,77 +21,104 @@ const MenuLeft = () => {
     navigation.navigate('BottomNavigator', {screen: 'Home'});
     closeSheet('left-menu-sheet');
   };
-
+  const {icon} = useThemeColor();
   return (
-    <View style={{height: height}} className="flex-1 justify-between ">
-      <View className="gap-5">
+    <ThemedView style={{height: height}} styles="flex-1 justify-between ">
+      <ThemedView styles="gap-5">
         <Pressable onPress={() => closeSheet('left-menu-sheet')}>
-          <MaterialCommunityIcons name="close" size={24} color="black" />
+          <MaterialCommunityIcons name="close" size={24} color={icon} />
         </Pressable>
 
-        <View>
-          <View className="gap-4">
+        <ThemedView>
+          <ThemedView styles="gap-4">
             <Pressable className="gap-2" onPress={() => handleHomeRoute()}>
-              <Text>Home</Text>
-              <View className="h-[1px] bg-gray-600" />
+              <ThemedText styles="font-SemiBold text-[14px]">Home</ThemedText>
+              <View className="h-[1px] bg-zinc-300" />
             </Pressable>
             <Pressable className="gap-2">
-              <Text>Browse All Categories</Text>
-              <View className="h-[1px] bg-gray-600" />
+              <ThemedText styles="font-SemiBold text-[14px]">
+                Browse All Categories
+              </ThemedText>
+
+              <View className="h-[1px] bg-zinc-300" />
             </Pressable>
             <Pressable className="gap-2">
-              <Text>Contact</Text>
-              <View className="h-[1px] bg-gray-600" />
+              <ThemedText styles="font-SemiBold text-[14px]">
+                Contact
+              </ThemedText>
+
+              <ThemedView className="h-[1px] bg-zinc-300" />
             </Pressable>
             <Pressable className="gap-2">
-              <Text>Order Tracking</Text>
-              <View className="h-[1px] bg-gray-600" />
+              <ThemedText styles="font-SemiBold text-[14px]">
+                Order Tracking
+              </ThemedText>
+
+              <View className="h-[1px] bg-zinc-300" />
             </Pressable>
-          </View>
-        </View>
-        <View className="flex-row items-center gap-5">
-          <View className="flex-row bg-gray-300 rounded-lg py-2 px-4 gap-2 items-center">
+          </ThemedView>
+        </ThemedView>
+        <ThemedView styles="flex-row items-center gap-5">
+          <ThemedViewLightGray styles="flex-row rounded-lg py-2 px-4 gap-2 items-center">
             <MaterialCommunityIcons
               name="heart-outline"
-              size={24}
-              color="black"
+              size={20}
+              color={icon}
             />
-            <Text>Wishlist</Text>
-          </View>
-          <View className="flex-row bg-gray-300 rounded-lg py-2 px-4 gap-2 items-center">
-            <Feather name="search" size={24} color="black" />
-
-            <Text>Search</Text>
-          </View>
-        </View>
-        <View>
-          <Text className="border-b-zinc-700">Need help?</Text>
-          <Text>Address:</Text>
-          <Text>Email:</Text>
-          <Text>Phone:</Text>
-        </View>
-      </View>
-      <View className="gap-4">
-        <View className="flex-row gap-3">
-          <Octicons name="person" size={24} color="black" />
+            <ThemedText2 styles="font-SemiBold text-[14px]">
+              Wishlist
+            </ThemedText2>
+          </ThemedViewLightGray>
+          <ThemedViewLightGray styles="flex-row rounded-lg py-2 px-4 gap-2 items-center">
+            <Feather name="search" size={20} color={icon} />
+            <ThemedText2 styles="font-SemiBold text-[14px] ">
+              Search
+            </ThemedText2>
+          </ThemedViewLightGray>
+        </ThemedView>
+        <ThemedView
+          style={{
+            gap: responsiveScreenHeight(1),
+          }}>
+          <ThemedText styles="underline font-Regular text-[14px]">
+            Need help?
+          </ThemedText>
+          <ThemedText styles=" font-Regular">
+            Address: 69/M (3rd Floor), Panthapath, Dhaka-1205, Bangladesh
+          </ThemedText>
+          <ThemedText styles=" font-Regular">
+            Email: support@xioncart.com
+          </ThemedText>
+          <ThemedText styles=" font-Regular">Phone: +8801671437932</ThemedText>
+        </ThemedView>
+      </ThemedView>
+      <ThemedView styles="gap-4">
+        <ThemedView styles="flex-row gap-3 items-center">
+          <Octicons name="person" size={24} color={icon} />
           <Pressable
             onPress={() =>
               navigation.navigate('BottomNavigator', {screen: 'Login'})
             }>
-            <Text>Login</Text>
+            <ThemedText styles="font-SemiBold text-[14px]">Login</ThemedText>
           </Pressable>
-        </View>
-        <View className="flex-row gap-5 items-center">
-          <View className="flex-row gap-3">
-            <Text>🇧🇩</Text>
-            <Text>BDT</Text>
-          </View>
-          <View>
-            <Text>English</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+        </ThemedView>
+        <ThemedView styles="flex-row  justify-between">
+          <ThemedView styles="w-32">
+            <CustomDropdown
+              data={currencyOptions}
+              placeholder={currencyOptions[0]?.label}
+            />
+          </ThemedView>
+
+          <ThemedView styles="w-32">
+            <CustomDropdown
+              data={languageOptions}
+              placeholder={languageOptions[0]?.label}
+            />
+          </ThemedView>
+        </ThemedView>
+      </ThemedView>
+    </ThemedView>
   );
 };
 

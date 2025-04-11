@@ -29,7 +29,7 @@ function App() {
   const theme = useColorScheme();
 
   return (
-    <GestureHandlerRootView className="flex-1 font-sans font-normal">
+    <GestureHandlerRootView className="flex-1">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SheetProvider>
