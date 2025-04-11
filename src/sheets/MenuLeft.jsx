@@ -66,7 +66,12 @@ const MenuLeft = () => {
       <View className="gap-4">
         <View className="flex-row gap-3">
           <Octicons name="person" size={24} color="black" />
-          <Text>Login</Text>
+          <Pressable
+            onPress={() =>
+              navigation.navigate('BottomNavigator', {screen: 'Login'})
+            }>
+            <Text>Login</Text>
+          </Pressable>
         </View>
         <View className="flex-row gap-5 items-center">
           <View className="flex-row gap-3">

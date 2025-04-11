@@ -20,6 +20,7 @@ import CarouselContanier from '../components/CarouselContainer';
 import {useGetCategoryQuery} from '../redux/slices/categorySlice';
 import {banner, categories} from '../../assets/data';
 import CategoryCarouselItem from '../components/CategoryCarouselItem';
+import Footer from '../components/Footer';
 
 const HomeScreen = () => {
   const isCarousel = useRef(null);
@@ -125,6 +126,7 @@ const HomeScreen = () => {
               autoPlay={false}
             />
           </ThemedView>
+          <Footer />
         </ThemedView>
       </ThemedView>
     </ScrollView>

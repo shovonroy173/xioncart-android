@@ -9,8 +9,6 @@ import {
 import Menu from './src/components/Menu';
 import BottomNavigator from './src/screens/BottomNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from './src/screens/LoginScreen';
-import RegisterScreen from './src/screens/RegisterScreen';
 import {SheetProvider} from './src/sheets/GlobalSheetContext';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ModalComponent from './src/sheets/ModalComponent';
@@ -22,18 +20,22 @@ import AuthScreen from './src/screens/AuthScreen';
 import {Provider} from 'react-redux';
 import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
+import {navigationRef} from './src/utils/NavigationService';
+import RightCategoriesSheet from './src/sheets/RightCategoriesSheet';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   const theme = useColorScheme();
+
   return (
     <GestureHandlerRootView className="flex-1 font-sans font-normal">
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <SheetProvider>
             <NavigationContainer
-              theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
+              theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+              ref={navigationRef}>
               <Menu />
               <Stack.Navigator screenOptions={{headerShown: false}}>
                 <Stack.Screen
@@ -41,13 +43,12 @@ function App() {
                   component={BottomNavigator}
                 />
                 <Stack.Screen name="Account" component={AuthScreen} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="Register" component={RegisterScreen} />
               </Stack.Navigator>
 
               <MenuLeftSheet id="left-menu-sheet" />
               <RightCartSheet id="right-cart-sheet" />
               <RightSearchSheet id="right-search-sheet" />
+              <RightCategoriesSheet id="right-categories-sheet" />
               <ModalComponent id="modal1" />
             </NavigationContainer>
           </SheetProvider>

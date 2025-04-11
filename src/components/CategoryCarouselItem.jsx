@@ -1,6 +1,5 @@
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
-import {ImageBackground} from 'react-native';
+import {ImageBackground, Pressable} from 'react-native';
 import React from 'react';
 import ThemedView from '../utils/ThemedView';
 import {
@@ -8,13 +7,22 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import ThemedText from '../utils/ThemedText';
+import {navigate} from '../utils/NavigationService';
+// import {useNavigation} from '@react-navigation/native';
 
 export const ITEM_WIDTH = responsiveWidth(100);
 export const SLIDER_WIDTH = responsiveWidth(100);
 
 const CategoryCarouselItem = ({item}) => {
+  // const navigation = useNavigation();
   return (
-    <ThemedView>
+    <Pressable
+      onPress={() =>
+        navigate('BottomNavigator', {
+          screen: 'Shop',
+          params: {category: item?.name},
+        })
+      }>
       <ImageBackground
         source={{uri: item?.imgUrl}}
         style={{
@@ -38,7 +46,7 @@ const CategoryCarouselItem = ({item}) => {
           <ThemedText styles="font-Medium text-xl">{item?.name}</ThemedText>
         </ThemedView>
       </ImageBackground>
-    </ThemedView>
+    </Pressable>
   );
 };
 

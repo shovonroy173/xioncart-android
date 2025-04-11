@@ -52,7 +52,7 @@ const Menu = () => {
             navigation.navigate('BottomNavigator', {screen: 'Home'})
           }>
           <Image
-            source={require('../../assets/images/logo.png')}
+            source={require('../../assets/images/logo.webp')}
             className="w-28 h-10 object-cover"
           />
         </Pressable>
@@ -67,7 +67,6 @@ const Menu = () => {
             <Feather
               name="search"
               size={24}
-              // color="black"
             />
           </Pressable>
 
@@ -79,7 +78,7 @@ const Menu = () => {
 
                 // color="black"
               />
-              <Text className="rounded-full bg-red-500 text-white absolute -right-3 -top-3 px-2 py-0.5">
+              <Text className="rounded-full bg-red-500 text-white absolute -right-3 -top-3 px-2 py-0.5 font-Regular">
                 0
               </Text>
             </View>

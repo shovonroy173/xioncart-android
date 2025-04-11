@@ -11,6 +11,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import AuthScreen from './AuthScreen';
+import RegisterScreen from './RegisterScreen';
+import LoginScreen from './LoginScreen';
 
 const BottomNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -45,6 +47,22 @@ const BottomNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarItemStyle: {display: 'none', width: 0},
+        }}
+      />
+      <Tab.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarItemStyle: {display: 'none', width: 0},
+        }}
+      />
+      <Tab.Screen
         name="Shop"
         component={ShopScreen}
         options={{
@@ -61,7 +79,6 @@ const BottomNavigator = () => {
             fontFamily: 'AlbertSans-Regular',
           },
           tabBarLabelPosition: 'below-icon',
-
         }}
       />
       <Tab.Screen
@@ -87,7 +104,6 @@ const BottomNavigator = () => {
             fontFamily: 'AlbertSans-Regular',
           },
           tabBarLabelPosition: 'below-icon',
-
         }}
       />
       <Tab.Screen
@@ -106,8 +122,8 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
-          tabBarLabelPosition: 'below-icon',
 
+          tabBarLabelPosition: 'below-icon',
         }}
       />
       <Tab.Screen
@@ -127,8 +143,10 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarBadgeStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
           tabBarLabelPosition: 'below-icon',
-
         }}
       />
       <Tab.Screen
@@ -151,8 +169,10 @@ const BottomNavigator = () => {
           tabBarLabelStyle: {
             fontFamily: 'AlbertSans-Regular',
           },
+          tabBarBadgeStyle: {
+            fontFamily: 'AlbertSans-Regular',
+          },
           tabBarLabelPosition: 'below-icon',
-
         }}
       />
     </Tab.Navigator>

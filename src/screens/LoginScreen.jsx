@@ -81,8 +81,7 @@ const LoginScreen = () => {
             <ScrollView
               className="flex-grow"
               showsVerticalScrollIndicator={false}>
-            <ThemedText styles="text-xl font-Medium pb-2">Log in</ThemedText>
-
+              <ThemedText styles="text-xl font-Medium pb-2">Log in</ThemedText>
               <ThemedTextInput
                 name="email"
                 control={control}
@@ -115,7 +114,11 @@ const LoginScreen = () => {
               <ThemedView styles="flex-row items-center gap-2 mt-5">
                 <ThemedText styles="font-Medium">Are new here?</ThemedText>
                 <Pressable
-                  onPress={() => navigation.navigate('Register')}
+                  onPress={() =>
+                    navigation.navigate('BottomNavigator', {
+                      screen: 'Register',
+                    })
+                  }
                   className="flex-row gap-1">
                   <ThemedText styles="font-Medium underline">
                     Register

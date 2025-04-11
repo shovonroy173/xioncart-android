@@ -18,7 +18,7 @@ export const categories = [
     name: 'Jacket',
     slug: 'jacket',
     imgUrl:
-      'https://images.unsplash.com/photo-1612257659293-37f230385cf1?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjg0OXwwfDF8c2VhcmNofDg3fHxFbGVjdHJvbmljc3xlbnwwfHx8fDE2NzA4NzY1Nzg&ixlib=rb-1.2.1&q=80&w=1080',
+      'https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
   },
   {
     name: 'Fashion',
@@ -44,4 +44,12 @@ export const categories = [
     imgUrl:
       'https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
+];
+
+export const sortOptions = [
+  { label: 'Default', value: 'default' },
+  { label: 'Alphabetically (A to Z)', value: 'name-asc' },
+  { label: 'Alphabetically (Z to A)', value: 'name-desc' },
+  { label: 'Price (Low to High)', value: 'price-asc' },
+  { label: 'Price (High to Low)', value: 'price-desc' },
 ];

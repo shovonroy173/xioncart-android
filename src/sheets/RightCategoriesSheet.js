@@ -15,7 +15,7 @@ import SearchRight from './SearchRight';
 const {width, height} = Dimensions.get('window');
 const SHEET_ANIMATION_DURATION = 300;
 
-const RightSearchSheet = ({id}) => {
+const RightCategoriesSheet = ({id}) => {
   const {sheets, closeSheet} = useSheetContext();
   const sheet = sheets[id];
   const side = sheet?.side || 'right';
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RightSearchSheet;
+export default RightCategoriesSheet;
