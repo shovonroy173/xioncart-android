@@ -26,8 +26,8 @@ function CarouselContainer({
         inactiveSlideOpacity={1}
         loop={autoPlay}
         autoplay={autoPlay}
-        autoplayInterval={10000}
-        autoplayDelay={5000}
+        autoplayInterval={1000}
+        autoplayDelay={500}
         enableSnap={autoPlay}
         windowSize={10}
         onSnapToItem={index => setActiveSlide(index)}
