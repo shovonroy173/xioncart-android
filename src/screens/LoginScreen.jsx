@@ -12,8 +12,8 @@ import ThemedText from '../utils/ThemedText';
 import ThemedTextInput from '../utils/ThemedTextInput';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {loginSchema} from '../utils/loginSchema';
+// import {yupResolver} from '@hookform/resolvers/yup';
+// import {loginSchema} from '../utils/loginSchema';
 import {useLoginMutation} from '../redux/slices/authSlice';
 import ThemedView from '../utils/ThemedView';
 import ThemedViewLightRed from '../utils/ThemedViewLightRed';
@@ -25,6 +25,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
+// import { store } from '../redux/store';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -41,7 +42,7 @@ const LoginScreen = () => {
     reset,
     formState: {errors},
   } = useForm({
-    resolver: yupResolver(loginSchema),
+    // resolver: yupResolver(loginSchema),
     mode: 'onChange',
   });
 
@@ -54,6 +55,9 @@ const LoginScreen = () => {
     } catch (error) {
       console.log(error);
     }
+    // store.dispatch(authSlice.util.resetApiState());
+    // console.log('AFTER RESET:', store.getState().authApi);
+    reset();
   };
 
   const handleForgetPassword = () => {
@@ -83,12 +87,12 @@ const LoginScreen = () => {
               showsVerticalScrollIndicator={false}>
               <ThemedText styles="text-xl font-Medium pb-2">Log in</ThemedText>
               <ThemedTextInput
-                name="email"
+                name="phone"
                 control={control}
-                error={errors?.email?.message}
-                label="Email Address *"
-                placeholder="Enter your email"
-                type="email"
+                error={errors?.phone?.message}
+                label="Phone *"
+                placeholder="Enter your phone"
+                type="text"
               />{' '}
               <ThemedTextInput
                 name="password"
@@ -131,7 +135,7 @@ const LoginScreen = () => {
             </ScrollView>
             <ThemedView styles="pb-2">
               <ThemedPressable
-                styles=" rounded-lg"
+                styles="rounded-lg"
                 style={{
                   paddingVertical: responsiveHeight(2),
                 }}

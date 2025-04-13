@@ -10,12 +10,12 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
-import { useThemeColor } from '../utils/useThemeColor.js';
+import {useThemeColor} from '../utils/useThemeColor.js';
 
 const Menu = () => {
   const navigation = useNavigation();
   const {openSheet} = useSheetContext();
-  const {icon, text} = useThemeColor();
+  const {icon} = useThemeColor();
   return (
     <ThemedView
       style={{
@@ -65,21 +65,13 @@ const Menu = () => {
             paddingRight: responsiveWidth(4),
           }}>
           <Pressable onPress={() => openSheet('right-search-sheet', 'right')}>
-            <Feather
-              name="search"
-              size={24}
-              color={icon}
-            />
+            <Feather name="search" size={24} color={icon} />
           </Pressable>
 
           <Pressable onPress={() => openSheet('right-cart-sheet', 'right')}>
             <View className="relative">
-              <Feather
-                name="shopping-bag"
-                size={24}
-                color={icon}
-              />
-              <Text className={`rounded-full bg-red-500 text-${text} absolute -right-3 -top-3 px-2 py-0.5 font-Regular`}>
+              <Feather name="shopping-bag" size={24} color={icon} />
+              <Text className="rounded-full bg-red-500 text-white absolute -right-3 -top-3 px-2 py-0.5 font-Regular">
                 0
               </Text>
             </View>

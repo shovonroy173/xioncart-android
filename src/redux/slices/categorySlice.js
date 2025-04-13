@@ -5,8 +5,11 @@ export const categorySlice = authSlice.injectEndpoints({
     getCategory: builder.query({
       query: () => '/frontend/categories',
     }),
+    getProducts: builder.query({
+      query: () => '/products',
+    }),
   }),
   overrideExisting: true,
 });
 
-export const {useGetCategoryQuery} = categorySlice;
+export const {useGetCategoryQuery, useGetProductsQuery} = categorySlice;

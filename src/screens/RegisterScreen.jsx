@@ -44,11 +44,15 @@ const RegisterScreen = () => {
   const onSubmit = async data => {
     console.log('Form submitted:', data);
     try {
-      const res = await register({
+      const val = {
         name: data.firstName,
         email: data.email,
         password: data.password,
-      }).unwrap();
+        // phone: data.phone,
+      };
+      console.log(val);
+
+      const res = await register(val).unwrap();
       console.log('LINE AT 21', res);
       reset();
     } catch (error) {
@@ -59,6 +63,7 @@ const RegisterScreen = () => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
       className="flex-1">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} className="flex-1">
         <ThemedView styles="flex-1">
@@ -109,7 +114,7 @@ const RegisterScreen = () => {
                 type="email"
               />{' '}
               <ThemedTextInput
-                name="Phone"
+                name="phone"
                 control={control}
                 error={errors?.phone?.message}
                 label="Phone"
@@ -139,7 +144,7 @@ const RegisterScreen = () => {
                 </Pressable>
               </ThemedView>
             </ScrollView>
-            <ThemedView styles="py-2">
+            <ThemedView styles="pb-2">
               <ThemedPressable
                 styles=" rounded-lg"
                 style={{

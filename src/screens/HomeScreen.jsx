@@ -17,7 +17,7 @@ import CarouselCardItem, {
   SLIDER_WIDTH,
 } from '../components/CarouselCardItem';
 import CarouselContanier from '../components/CarouselContainer';
-import {useGetCategoryQuery} from '../redux/slices/categorySlice';
+import {useGetCategoryQuery, useGetProductsQuery} from '../redux/slices/categorySlice';
 import {banner, categories} from '../../assets/data';
 import CategoryCarouselItem from '../components/CategoryCarouselItem';
 import Footer from '../components/Footer';
@@ -38,12 +38,25 @@ const HomeScreen = () => {
     featuredError,
     featuredFetching,
   );
+  const {
+    data: products,
+    isLoading: productsLoading,
+    isError: productsError,
+    isFetching: productsFetching,
+  } = useGetProductsQuery();
+  console.log(
+    'HOME SCREEN LINE AT 48',
+    products,
+    productsLoading,
+    productsError,
+    productsFetching,
+  );
 
   return (
     <ScrollView vertical showsVerticalScrollIndicator={false}>
       <ThemedView
         style={{
-          gap: responsiveHeight(5),
+          gap: responsiveHeight(0),
         }}>
         {featuredLoading ? (
           <ActivityIndicator size={'small'} color={'#ef4444'} />
@@ -106,12 +119,13 @@ const HomeScreen = () => {
         />
         <ThemedView
           style={{
+            paddingTop: responsiveHeight(8),
             paddingHorizontal: responsiveWidth(5),
             gap: responsiveHeight(5),
           }}>
           <ThemedView
             style={{
-              gap: responsiveHeight(2),
+              gap: responsiveHeight(3),
             }}>
             <ThemedText styles="font-Medium text-center text-xl">
               Categories you might like
