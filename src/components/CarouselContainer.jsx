@@ -39,7 +39,7 @@ function CarouselContainer({
       />
 
       <Pagination
-        dotsLength={data.length}
+        dotsLength={data?.length}
         activeDotIndex={activeSlide}
         containerStyle={{
           paddingVertical: 10,
