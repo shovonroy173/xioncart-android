@@ -17,14 +17,28 @@ import CarouselCardItem, {
   SLIDER_WIDTH,
 } from '../components/CarouselCardItem';
 import CarouselContanier from '../components/CarouselContainer';
-import {useGetCategoryQuery, useGetProductsQuery} from '../redux/slices/categorySlice';
-import {banner, categories} from '../../assets/data';
+import {
+  useGetBrandsQuery,
+  useGetCategoryQuery,
+  useGetProductsQuery,
+} from '../redux/slices/categorySlice';
+import {banner, benefits, categories, sales} from '../../assets/data';
 import CategoryCarouselItem from '../components/CategoryCarouselItem';
 import Footer from '../components/Footer';
+import SaleCarouselItem from '../components/SaleCarouselItem';
+import ProductCarouselItem from '../components/ProductCarouselItem';
+import ThemedViewLightGray from '../utils/ThemedViewLightGray';
+import ThemedPressable from '../utils/ThemedPressable';
+import ThemedText2 from '../utils/ThemeText2';
+import BenefitsCarouselItem from '../components/BenefitsCarouselItem';
+import BrandsCarouselItem from '../components/BrandsCarouselItem';
 
 const HomeScreen = () => {
   const isCarousel = useRef(null);
   const isCarousel2 = useRef(null);
+  const isCarousel3 = useRef(null);
+  const isCarousel4 = useRef(null);
+  const isCarousel5 = useRef(null);
   const {
     data: featuredCategories,
     isLoading: featuredLoading,
@@ -51,6 +65,28 @@ const HomeScreen = () => {
     productsError,
     productsFetching,
   );
+  const {
+    data: brands,
+    isLoading: brandsLoading,
+    isError: brandsError,
+    isFetching: brandsFetching,
+  } = useGetBrandsQuery();
+  console.log(
+    'HOME SCREEN LINE AT 48',
+    brands,
+    brandsLoading,
+    brandsError,
+    brandsFetching,
+  );
+
+  // if (
+  //   productsFetching ||
+  //   productsLoading ||
+  //   featuredLoading ||
+  //   featuredLoading
+  // ) {
+  //   return <ActivityIndicator size={'large'} color={'#ef4444'} />;
+  // }
 
   return (
     <ScrollView vertical showsVerticalScrollIndicator={false}>
@@ -58,7 +94,7 @@ const HomeScreen = () => {
         style={{
           gap: responsiveHeight(0),
         }}>
-        {featuredLoading ? (
+        {featuredLoading || featuredFetching ? (
           <ActivityIndicator size={'small'} color={'#ef4444'} />
         ) : (
           <ScrollView
@@ -116,6 +152,7 @@ const HomeScreen = () => {
           itemWidth={ITEM_WIDTH}
           paginationAbove={true}
           autoPlay={true}
+          loop={false}
         />
         <ThemedView
           style={{
@@ -123,6 +160,7 @@ const HomeScreen = () => {
             paddingHorizontal: responsiveWidth(5),
             gap: responsiveHeight(5),
           }}>
+          {/* Categories */}
           <ThemedView
             style={{
               gap: responsiveHeight(3),
@@ -138,8 +176,105 @@ const HomeScreen = () => {
               itemWidth={ITEM_WIDTH}
               paginationAbove={false}
               autoPlay={false}
+              loop={false}
             />
           </ThemedView>
+          {/* sales */}
+          <CarouselContanier
+            ref={isCarousel3}
+            data={sales}
+            renderItem={SaleCarouselItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={ITEM_WIDTH}
+            paginationAbove={false}
+            autoPlay={false}
+          />
+          {/* trending products */}
+          <ThemedView
+            style={{
+              gap: responsiveHeight(3),
+            }}>
+            <ThemedView
+              style={{
+                gap: responsiveHeight(1),
+              }}>
+              <ThemedText styles="font-Medium text-center text-xl">
+                Trending Now
+              </ThemedText>
+              <ThemedText styles="font-Medium text-center text-md">
+                Hot picks of the season
+              </ThemedText>
+            </ThemedView>
+            {productsFetching || productsLoading ? (
+              <ActivityIndicator size={'small'} color={'#ef4444'} />
+            ) : (
+              <CarouselContanier
+                ref={isCarousel3}
+                data={products?.products}
+                renderItem={ProductCarouselItem}
+                sliderWidth={SLIDER_WIDTH}
+                itemWidth={ITEM_WIDTH / 2}
+                paginationAbove={false}
+                autoPlay={false}
+                loop={true}
+                useScrollView={true}
+                enableSnap={true}
+              />
+            )}
+          </ThemedView>
+          <ThemedViewLightGray
+            styles="items-center rounded-sm"
+            style={{
+              gap: responsiveHeight(3),
+            }}>
+            <Image
+              source={{
+                uri: 'https://res.cloudinary.com/dxacttggi/image/upload/c_fill,h_732,w_2000/v1/xion-cart/banners/plavpemygbfxvz7fqmyt?_a=BAMCkGWO0',
+              }}
+              style={{
+                width: responsiveWidth(70),
+                height: responsiveHeight(15),
+                objectFit: 'cover',
+              }}
+            />
+            <ThemedText styles="font-SemiBold text-2xl">
+              Winter Collection
+            </ThemedText>
+            <ThemedText styles="font-SemiBold text-md">
+              Stay warm with our new winter collection.
+            </ThemedText>
+            <ThemedPressable
+              styles="rounded-xl"
+              style={{
+                paddingHorizontal: responsiveWidth(10),
+                paddingVertical: responsiveHeight(2),
+                marginVertical: responsiveHeight(3),
+              }}>
+              <ThemedText2 styles="font-SemiBold text-md">Discover</ThemedText2>
+            </ThemedPressable>
+          </ThemedViewLightGray>
+          {/* Benefits */}
+          <CarouselContanier
+            ref={isCarousel4}
+            data={benefits}
+            renderItem={BenefitsCarouselItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={ITEM_WIDTH}
+            paginationAbove={false}
+            autoPlay={false}
+            // loop={true}
+            // useScrollView={true}
+          />
+          <CarouselContanier
+            ref={isCarousel5}
+            data={brands?.brands}
+            renderItem={BrandsCarouselItem}
+            sliderWidth={SLIDER_WIDTH}
+            itemWidth={ITEM_WIDTH / 2}
+            paginationAbove={false}
+            autoPlay={true}
+            loop={true}
+          />
           <Footer />
         </ThemedView>
       </ThemedView>
