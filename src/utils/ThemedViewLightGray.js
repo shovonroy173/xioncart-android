@@ -6,7 +6,7 @@ const ThemedViewLightGray = ({children, styles, ...props}) => {
   const theme = useColorScheme();
 
   const themedStyles = `${
-    theme === 'dark' ? 'bg-zinc-900' : 'bg-zinc-100'
+    theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-100'
   } ${styles}`;
 
   return (
