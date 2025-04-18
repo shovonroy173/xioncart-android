@@ -13,6 +13,7 @@ import Octicons from 'react-native-vector-icons/Octicons';
 import AuthScreen from './AuthScreen';
 import RegisterScreen from './RegisterScreen';
 import LoginScreen from './LoginScreen';
+import SingleProductScreen from './SingleProductScreen';
 
 const BottomNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -59,6 +60,14 @@ const BottomNavigator = () => {
       <Tab.Screen
         name="Register"
         component={RegisterScreen}
+        options={{
+          tabBarButton: () => null,
+          tabBarItemStyle: {display: 'none', width: 0},
+        }}
+      />
+      <Tab.Screen
+        name="SingleProduct"
+        component={SingleProductScreen}
         options={{
           tabBarButton: () => null,
           tabBarItemStyle: {display: 'none', width: 0},

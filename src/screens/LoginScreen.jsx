@@ -25,11 +25,12 @@ import {
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
-// import { store } from '../redux/store';
+import {useToast} from 'react-native-toast-notifications';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const theme = useColorScheme();
+  const toast = useToast();
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [login] = useLoginMutation();
   const togglePasswordVisibility = () => {
@@ -51,13 +52,27 @@ const LoginScreen = () => {
     try {
       const res = await login(data).unwrap();
       console.log('LINE AT 21', res);
+      toast.show('Login Successfully!', {
+        type: 'success',
+        placement: 'top',
+        duration: 2000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
       reset();
     } catch (error) {
       console.log(error);
+      toast.show(error?.data?.message, {
+        type: 'danger',
+        placement: 'top',
+        duration: 2000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
     }
     // store.dispatch(authSlice.util.resetApiState());
     // console.log('AFTER RESET:', store.getState().authApi);
-    reset();
+    // reset();
   };
 
   const handleForgetPassword = () => {

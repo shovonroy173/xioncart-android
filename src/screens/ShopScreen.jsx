@@ -10,10 +10,25 @@ import {sortOptions} from '../../assets/data';
 import Footer from '../components/Footer';
 import {useThemeColor} from '../utils/useThemeColor';
 import CustomDropdown from '../components/CustomDropdown';
+import {useGetProductByCategoryQuery} from '../redux/slices/categorySlice';
 const ShopScreen = ({route, params}) => {
   console.log(route, params);
   const {openSheet} = useSheetContext();
   const {icon} = useThemeColor();
+  const {
+    data: products,
+    isLoading: productsLoading,
+    isError: productsError,
+    isFetching: productsFetching,
+  } = useGetProductByCategoryQuery(route?.params?.id);
+  console.log(
+    'Shop SCREEN LINE AT 25',
+    products,
+    productsLoading,
+    productsError,
+    productsFetching,
+  );
+
   return (
     <ThemedView styles="flex-1">
       <ScrollView vertical showsVerticalScrollIndicator={false}>

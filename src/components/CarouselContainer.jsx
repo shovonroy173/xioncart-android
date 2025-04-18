@@ -13,6 +13,7 @@ function CarouselContainer({
   autoPlay,
   loop,
   useScrollView,
+  enableSnap,
 }) {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -26,12 +27,14 @@ function CarouselContainer({
         itemWidth={itemWidth}
         inactiveSlideScale={1}
         inactiveSlideOpacity={1}
-        loop={autoPlay || loop}
+        loop={loop}
         // loop={true}
+        // autoPlay={true}
         autoplay={autoPlay}
         autoplayInterval={1000}
         autoplayDelay={500}
-        // enableSnap={autoPlay}
+        enableSnap={enableSnap}
+        // enableSnap={true}
         windowSize={10}
         onSnapToItem={index => setActiveSlide(index)}
         activeSlideAlignment="start"

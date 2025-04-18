@@ -22,6 +22,7 @@ import {persistor, store} from './src/redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {navigationRef} from './src/utils/NavigationService';
 import RightCategoriesSheet from './src/sheets/RightCategoriesSheet';
+import {ToastProvider} from 'react-native-toast-notifications';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,32 +30,34 @@ function App() {
   const theme = useColorScheme();
 
   return (
-    <GestureHandlerRootView className="flex-1">
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <SheetProvider>
-            <NavigationContainer
-              theme={theme === 'dark' ? DarkTheme : DefaultTheme}
-              ref={navigationRef}>
-              <Menu />
-              <Stack.Navigator screenOptions={{headerShown: false}}>
-                <Stack.Screen
-                  name="BottomNavigator"
-                  component={BottomNavigator}
-                />
-                <Stack.Screen name="Account" component={AuthScreen} />
-              </Stack.Navigator>
+    <ToastProvider>
+      <GestureHandlerRootView className="flex-1">
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <SheetProvider>
+              <NavigationContainer
+                theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+                ref={navigationRef}>
+                <Menu />
+                <Stack.Navigator screenOptions={{headerShown: false}}>
+                  <Stack.Screen
+                    name="BottomNavigator"
+                    component={BottomNavigator}
+                  />
+                  <Stack.Screen name="Account" component={AuthScreen} />
+                </Stack.Navigator>
 
-              <MenuLeftSheet id="left-menu-sheet" />
-              <RightCartSheet id="right-cart-sheet" />
-              <RightSearchSheet id="right-search-sheet" />
-              <RightCategoriesSheet id="right-categories-sheet" />
-              <ModalComponent id="modal1" />
-            </NavigationContainer>
-          </SheetProvider>
-        </PersistGate>
-      </Provider>
-    </GestureHandlerRootView>
+                <MenuLeftSheet id="left-menu-sheet" />
+                <RightCartSheet id="right-cart-sheet" />
+                <RightSearchSheet id="right-search-sheet" />
+                <RightCategoriesSheet id="right-categories-sheet" />
+                <ModalComponent id="modal1" />
+              </NavigationContainer>
+            </SheetProvider>
+          </PersistGate>
+        </Provider>
+      </GestureHandlerRootView>
+    </ToastProvider>
   );
 }
 

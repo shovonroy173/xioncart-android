@@ -46,6 +46,69 @@ export const categories = [
   },
 ];
 
+export const sales = [
+  {
+    id: 1,
+    title: 'Summer Sale',
+    subTitle: 'Get up to 50% off on summer collection!',
+    button: 'Shop Now',
+    imgUrl:
+      'https://res.cloudinary.com/dxacttggi/image/upload/c_fill,h_732,w_2000/v1/xion-cart/banners/xqzbcrdsqzm5mjqvcyvc?_a=BAMCkGWO0',
+  },
+  {
+    id: 2,
+    title: 'The January Collection',
+    subTitle: 'Explore Our January Collection!',
+    button: 'Shop Now',
+    imgUrl:
+      'https://res.cloudinary.com/dxacttggi/image/upload/c_fill,h_732,w_2000/v1/xion-cart/banners/wnebbglay3hbmwtwfhil?_a=BAMCkGWO0',
+  },
+];
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+export const benefits = [
+  {
+    id: 1,
+    icon: <Feather name="box" size={24} />,
+    title: 'Free Shipping',
+    subTitle: 'Free shipping over order $120',
+  },
+  {
+    id: 2,
+    icon: (
+      <Feather
+        name="credit-card"
+        size={24}
+      />
+    ),
+    title: 'Flexible Payment',
+    subTitle: 'Pay with Multiple Credit Cards',
+  },
+  {
+    id: 3,
+    icon: (
+      <Feather
+        name="corner-up-left"
+        size={24}
+      />
+    ),
+    title: '14 Day Returns',
+    subTitle: 'Within 30 days for an exchange',
+  },
+  {
+    id: 4,
+    icon: (
+      <MaterialIcons
+        name="support-agent"
+        size={24}
+      />
+    ),
+    title: 'Premium Support',
+    subTitle: 'Outstanding premium support',
+  },
+];
+
 export const sortOptions = [
   {label: 'Default', value: 'default'},
   {label: 'Alphabetically (A to Z)', value: 'name-asc'},

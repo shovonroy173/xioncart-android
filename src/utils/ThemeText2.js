@@ -7,7 +7,7 @@ const ThemedText2 = ({children, styles, ...props}) => {
 
   // Apply theme-based text colors and other styles
   const themedStyles = `${
-    theme === 'dark' ? 'text-zinc-200' : 'text-zinc-500'
+    theme === 'dark' ? 'text-zinc-200' : 'text-zinc-100'
   } ${styles}`;
 
   return (

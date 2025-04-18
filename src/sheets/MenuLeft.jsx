@@ -13,6 +13,8 @@ import {useThemeColor} from '../utils/useThemeColor';
 import ThemedText2 from '../utils/ThemeText2';
 import ThemedViewLightGray from '../utils/ThemedViewLightGray';
 import CustomDropdown from '../components/CustomDropdown';
+import {useDispatch} from 'react-redux';
+import {logout} from '../redux/reducers/authReducer';
 const {height} = Dimensions.get('window');
 const MenuLeft = () => {
   const {closeSheet} = useSheetContext();
@@ -22,6 +24,7 @@ const MenuLeft = () => {
     closeSheet('left-menu-sheet');
   };
   const {icon} = useThemeColor();
+  const dispatch = useDispatch();
   return (
     <ThemedView style={{height: height}} styles="flex-1 justify-between ">
       <ThemedView styles="gap-5">
@@ -53,7 +56,6 @@ const MenuLeft = () => {
               <ThemedText styles="font-SemiBold text-[14px]">
                 Order Tracking
               </ThemedText>
-
               <View className="h-[1px] bg-zinc-300" />
             </Pressable>
           </ThemedView>
@@ -93,15 +95,30 @@ const MenuLeft = () => {
         </ThemedView>
       </ThemedView>
       <ThemedView styles="gap-4">
-        <ThemedView styles="flex-row gap-3 items-center">
-          <Octicons name="person" size={24} color={icon} />
-          <Pressable
-            onPress={() =>
-              navigation.navigate('BottomNavigator', {screen: 'Login'})
-            }>
-            <ThemedText styles="font-SemiBold text-[14px]">Login</ThemedText>
-          </Pressable>
+        <ThemedView styles="flex-row justify-between">
+          <ThemedView styles="flex-row gap-3 items-center border border-zinc-200 rounded-md px-6 py-2">
+            <Octicons name="person" size={24} color={icon} />
+            <Pressable
+              onPress={() =>
+                navigation.navigate('BottomNavigator', {screen: 'Login'})
+              }>
+              <ThemedText styles="font-SemiBold text-[14px]">Login</ThemedText>
+            </Pressable>
+          </ThemedView>
+          <ThemedView styles="flex-row gap-3 items-center border border-zinc-200 rounded-md px-4 py-2">
+            <MaterialCommunityIcons name="logout" size={24} color={icon} />
+            <Pressable
+              onPress={
+                () => {
+                  dispatch(logout());
+                  closeSheet('left-menu-sheet');
+                }
+              }>
+              <ThemedText styles="font-SemiBold text-[14px]">Logout</ThemedText>
+            </Pressable>
+          </ThemedView>
         </ThemedView>
+
         <ThemedView styles="flex-row  justify-between">
           <ThemedView styles="w-32">
             <CustomDropdown

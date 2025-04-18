@@ -25,10 +25,12 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {useNavigation} from '@react-navigation/native';
+import {useToast} from 'react-native-toast-notifications';
 
 const RegisterScreen = () => {
   const navigation = useNavigation();
   const theme = useColorScheme();
+  const toast = useToast();
   const [register] = useRegisterMutation();
 
   const {
@@ -45,18 +47,36 @@ const RegisterScreen = () => {
     console.log('Form submitted:', data);
     try {
       const val = {
-        name: data.firstName,
+        name: data.firstName + ' ' + data.firstName,
         email: data.email,
+        phone: data.phone,
         password: data.password,
-        // phone: data.phone,
+        role: '6775b315e7d91a2a97acef48',
       };
       console.log(val);
 
       const res = await register(val).unwrap();
       console.log('LINE AT 21', res);
+      toast.show('Account Created Successfully!', {
+        type: 'success',
+        placement: 'top',
+        duration: 2000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
+      navigation.navigate('BottomNavigator', {
+        screen: 'LoginScreen',
+      });
       reset();
     } catch (error) {
       console.log(error);
+      toast.show(error?.data?.message, {
+        type: 'danger',
+        placement: 'top',
+        duration: 2000,
+        offset: 30,
+        animationType: 'slide-in',
+      });
     }
   };
 
