@@ -15,7 +15,7 @@ export const SLIDER_WIDTH = responsiveWidth(100);
 
 const CategoryCarouselItem = ({item}) => {
   // const navigation = useNavigation();
-  console.log(item);
+  // console.log(item);
 
   return (
     <Pressable
